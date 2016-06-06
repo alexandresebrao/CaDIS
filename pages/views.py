@@ -26,4 +26,5 @@ def fecharpedido(request):
 
 
 def ajax(request):
-    return render()
+    context = {}
+    return render(request, 'ajax.html', context)
