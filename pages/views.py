@@ -9,7 +9,7 @@ import redis
 
 def index(request):
     context = {}
-    return render(request, 'polls/index.html', context)
+    return render(request, 'base.html', context)
 
 def carrinho(request):
     context = {}
