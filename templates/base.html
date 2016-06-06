@@ -1,50 +1,50 @@
-{% load staticfiles %}<!DOCTYPE html>
-<html>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Loja</title>
+    <title>DevBridge Autocomplete Demo</title>
+    <link href="content/styles.css" rel="stylesheet" />
+    <script>
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="{%static 'js/jquery.autocomplete.js'}"></script>
-<script>
-$('#autocomplete').autocomplete({
-    serviceUrl: 'listarprodutos',
-    onSelect: function (suggestion) {
-        alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-    }
-});
-</script>
+    $('#autocomplete-ajax').autocomplete({
+        // serviceUrl: '/autosuggest/service/url',
+        serviceUrl: 'listarprodutos'
+        lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+            var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+            return re.test(suggestion.value);
+        },
+        onSelect: function(suggestion) {
+            $('#selction-ajax').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
+        },
+        onHint: function (hint) {
+            $('#autocomplete-ajax-x').val(hint);
+        },
+        onInvalidateSelection: function() {
+            $('#selction-ajax').html('You selected: none');
+        }
+    });
+
+    </script>
 </head>
-
 <body>
+    <div class="container">
+        <h1>Ajax Autocomplete Demo</h1>
 
-<div id="page">
+        <h2>Ajax Lookup</h2>
+        <p>Type country name in english:</p>
+        <div style="position: relative; height: 80px;">
+            <input type="text" name="country" id="autocomplete-ajax" style="position: absolute; z-index: 2; background: transparent;"/>
+            <input type="text" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: transparent; z-index: 1;"/>
+        </div>
+        <div id="selction-ajax"></div>
 
-    <h1>Procurar Produto</h1>
+    {%for row in rows%}
+      <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
+    {%endfor%}
 
-    <form id="searchForm" method="post">
-		<fieldset>
-
-           	<input id="autocomplete" name="autocomplete" type="text" />
-            <div class="autocomplete-suggestions">
-                <div class="autocomplete-group"><strong>NHL</strong></div>
-                <div class="autocomplete-suggestion autocomplete-selected">...</div>
-                <div class="autocomplete-suggestion">...</div>
-                <div class="autocomplete-suggestion">...</div>
-            </div>
-            <input type="submit" value="Submit" id="submitButton" />
-
-			</div>
-
-    </form>
-
-</div>
-
-{%for row in rows%}
-  <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
-{%endfor%}
-
+    <script type="text/javascript" src="{%static 'js/jquery-1.8.2.min.js'}"></script>
+    <script type="text/javascript" src="{%static 'js/jquery.mockjax.js'}"></script>
+    <script type="text/javascript" src="{%static 'js/jquery.autocomplete.js'}"></script>
 
 </body>
 </html>
