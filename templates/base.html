@@ -44,7 +44,7 @@
 </div>
 
 {%for row in rows%}
-  <br>{{row.descricao}} - {{row.preco}}
+  <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
 {%endfor%}
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
