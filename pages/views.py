@@ -1,8 +1,3 @@
-
-from django.shortcuts import render
-
-# Create your views here.
-
 #DJANGO
 from django.shortcuts import render
 
@@ -13,7 +8,11 @@ import redis
 # Create your views here.
 
 def index(request):
-    context = {}
+    cluster = Cluster('Test Cluster')
+    session = cluster.connect('ecommerce')
+    session.set_keyspace('produto')
+    rows = session.execute('SELECT codigo, descricao, preco FROM produto')
+    context = {'rows' : rows}
     return render(request, 'base.html', context)
 
 def carrinho(request):
