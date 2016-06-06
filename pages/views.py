@@ -9,8 +9,7 @@ import redis
 
 def index(request):
     cluster = Cluster()
-    session = cluster.connect('Test Cluster')
-    session.set_keyspace('ecommerce')
+    session = cluster.connect('ecommerce')
     rows = session.execute('SELECT codigo, descricao, preco FROM produto')
     context = {'rows' : rows}
     return render(request, 'base.html', context)
