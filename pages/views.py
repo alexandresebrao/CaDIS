@@ -8,9 +8,9 @@ import redis
 # Create your views here.
 
 def index(request):
-    cluster = Cluster('Test Cluster')
-    session = cluster.connect('ecommerce')
-    session.set_keyspace('produto')
+    cluster = Cluster()
+    session = cluster.connect('Test Cluster')
+    session.set_keyspace('ecommerce')
     rows = session.execute('SELECT codigo, descricao, preco FROM produto')
     context = {'rows' : rows}
     return render(request, 'base.html', context)
