@@ -5,7 +5,16 @@
 <title>Loja</title>
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}" />
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="{%static 'js/jquery.autocomplete.js'}"></script>
+<script>
+$('#autocomplete').autocomplete({
+    serviceUrl: 'listarprodutos',
+    onSelect: function (suggestion) {
+        alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+    }
+});
+</script>
 </head>
 
 <body>
@@ -31,15 +40,6 @@
   <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
 {%endfor%}
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script src="{%static 'js/jquery.autocomplete.js'}"></script>
-<script>
-$('#autocomplete').autocomplete({
-    serviceUrl: 'listarprodutos',
-    onSelect: function (suggestion) {
-        alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-    }
-});
-</script>
+
 </body>
 </html>
