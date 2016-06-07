@@ -40,4 +40,11 @@ def ajax(request):
     cluster = Cluster()
     session = cluster.connect('ecommerce')
     rows = session.execute('SELECT codigo, descricao, preco FROM produto')
-    return JsonResponse(rows)
+    lista = []
+    for row in rows:
+        dicto = {}
+        dicto['name'] = row.descricao
+        dicto['price'] = row.price
+        lista.append(dicto)
+
+    return JsonResponse(lista,safe=False)
