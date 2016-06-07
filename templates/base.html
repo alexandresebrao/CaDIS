@@ -41,7 +41,7 @@ $(window).load(function(){
 		<h2>Enter your product</h2>
     <input type="text" id="search">
     </div>
-    <div id="resuslts"></div>
+    <div id="results"></div>
     <div>
       {%for row in rows%}
       <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
