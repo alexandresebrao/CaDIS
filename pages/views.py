@@ -2,6 +2,7 @@
 # DJANGO
 from django.shortcuts import render
 import simplejson as json
+from django.http import HttpResponse
 
 # DataBase
 from cassandra.cluster import Cluster
