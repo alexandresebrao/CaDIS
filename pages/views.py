@@ -2,7 +2,7 @@
 # DJANGO
 from django.shortcuts import render
 import simplejson as json
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 # DataBase
 from cassandra.cluster import Cluster
@@ -40,5 +40,4 @@ def ajax(request):
     cluster = Cluster()
     session = cluster.connect('ecommerce')
     rows = session.execute('SELECT codigo, descricao, preco FROM produto')
-    context = {'rows': rows}
-    return render(request, 'ajax.html', context)
+    return JsonResponse(rows)
