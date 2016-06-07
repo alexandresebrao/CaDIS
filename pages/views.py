@@ -1,7 +1,7 @@
 #coding: utf-8
 # DJANGO
 from django.shortcuts import render
-from django.utils import simplejson
+import simplejson as json
 
 # DataBase
 from cassandra.cluster import Cluster
@@ -34,5 +34,5 @@ def ajax(request):
        'countries': lista,
     }
 
-    data = simplejson.dumps(some_data_to_dump)
+    data = json.dumps(some_data_to_dump)
     return HttpResponse(data, content_type='application/json')
