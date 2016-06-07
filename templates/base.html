@@ -73,6 +73,7 @@ $(document).ready(function(){
     <div>
       {%for row in rows%}
       <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
+      {%endfor%}
     </div>
 </body>
 </html>
