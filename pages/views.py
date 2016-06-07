@@ -44,7 +44,7 @@ def ajax(request):
     for row in rows:
         dicto = {}
         dicto['name'] = row.descricao
-        dicto['price'] = row.price
+        dicto['price'] = row.preco
         lista.append(dicto)
 
     return JsonResponse(lista,safe=False)
