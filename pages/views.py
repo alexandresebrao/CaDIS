@@ -37,5 +37,8 @@ def ajax(request):
     #
     # data = json.dumps(some_data_to_dump)
     # return HttpResponse(data, content_type='application/json')
-    context = {}
+    cluster = Cluster()
+    session = cluster.connect('ecommerce')
+    rows = session.execute('SELECT codigo, descricao, preco FROM produto')
+    context = {'rows': rows}
     return render(request, 'ajax.html', context)
