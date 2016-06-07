@@ -1,50 +1,78 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+{% load staticfiles %}<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>DevBridge Autocomplete Demo</title>
-    <link href="content/styles.css" rel="stylesheet" />
-    <script>
-
-    $('#autocomplete-ajax').autocomplete({
-        // serviceUrl: '/autosuggest/service/url',
-        serviceUrl: 'listarprodutos'
-        lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
-            var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
-            return re.test(suggestion.value);
-        },
-        onSelect: function(suggestion) {
-            $('#selction-ajax').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
-        },
-        onHint: function (hint) {
-            $('#autocomplete-ajax-x').val(hint);
-        },
-        onInvalidateSelection: function() {
-            $('#selction-ajax').html('You selected: none');
-        }
+<meta charset="UTF-8">
+<title>Example of Twitter Typeahead</title>
+<script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
+<script  type="text/javascript" src="{%static 'js/typeahead.min.js'%}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('input.typeahead').typeahead({
+        name: 'countries',
+        prefetch: 'listarprodutos',
+        limit: 10
     });
-
-    </script>
+});
+</script>
+<style type="text/css">
+.bs-example{
+	font-family: sans-serif;
+	position: relative;
+	margin: 100px;
+}
+.typeahead, .tt-query, .tt-hint {
+	border: 2px solid #CCCCCC;
+	border-radius: 8px;
+	font-size: 24px;
+	height: 30px;
+	line-height: 30px;
+	outline: medium none;
+	padding: 8px 12px;
+	width: 396px;
+}
+.typeahead {
+	background-color: #FFFFFF;
+}
+.typeahead:focus {
+	border: 2px solid #0097CF;
+}
+.tt-query {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+	color: #999999;
+}
+.tt-dropdown-menu {
+	background-color: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 12px;
+	padding: 8px 0;
+	width: 422px;
+}
+.tt-suggestion {
+	font-size: 24px;
+	line-height: 24px;
+	padding: 3px 20px;
+}
+.tt-suggestion.tt-is-under-cursor {
+	background-color: #0097CF;
+	color: #FFFFFF;
+}
+.tt-suggestion p {
+	margin: 0;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Ajax Autocomplete Demo</h1>
-
-        <h2>Ajax Lookup</h2>
-        <p>Type country name in english:</p>
-        <div style="position: relative; height: 80px;">
-            <input type="text" name="country" id="autocomplete-ajax" style="position: absolute; z-index: 2; background: transparent;"/>
-            <input type="text" name="country" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: transparent; z-index: 1;"/>
-        </div>
-        <div id="selction-ajax"></div>
-
-    {%for row in rows%}
+    <div class="bs-example">
+		<h2>Enter your country name</h2>
+        <input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">
+    </div>
+    <div>
+      {%for row in rows%}
       <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
-    {%endfor%}
-
-    <script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
-    <script type="text/javascript" src="{%static 'js/jquery.mockjax.js' %}"></script>
-    <script type="text/javascript" src="{%static 'js/jquery.autocomplete.js' %}"></script>
-
+    </div>
 </body>
 </html>
