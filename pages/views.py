@@ -8,6 +8,7 @@ import redis
 # Create your views here.
 
 def index(request):
+    #CONNECT TO PYTHON - CASSANDRA#
     cluster = Cluster()
     session = cluster.connect('ecommerce')
     rows = session.execute('SELECT codigo, descricao, preco FROM produto')
