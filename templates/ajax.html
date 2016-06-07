@@ -2,8 +2,7 @@
 {%for row in rows%}
 {
   "name":"{{row.descricao}}",
-  "avatar": "http://0.gravatar.com/avatar/43a5669f2e4d2342701ed560d453a0dd?s=64&d=&r=G",
-  "location":"R${{row.preco|floatformat:"-2"}}"
+  "price":"R${{row.preco|floatformat:"-2"}}"
 },
 {%endfor%}
 ]

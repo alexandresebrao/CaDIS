@@ -18,7 +18,7 @@ $(window).load(function(){
                   output += '<div class="col-md-6 well">';
                   output += '<div class="col-md-7">';
                   output += '<h5>' + val.name + '</h5>';
-                  output += '<p>' + val.location + '</p>'
+                  output += '<p>' + val.price + '</p>'
                   output += '</div>';
                   output += '</div>';
                   if(count%2 == 0){
@@ -37,15 +37,11 @@ $(window).load(function(){
 </style>
 </head>
 <body>
-    <div class="bs-example">
-		<h2>Enter your product</h2>
-    <input type="text" id="search">
-    </div>
-    <div id="results"></div>
-    <div>
-      {%for row in rows%}
-      <br>{{row.descricao}} - R${{row.preco|floatformat:"-2"}}
-      {%endfor%}
-    </div>
+  <form role="form">
+          <div class="form-group">
+            <input type="email" class="form-control input-lg" id="search" placeholder="Sart type 'a' ....">
+          </div>
+  </form>
+
 </body>
 </html>
