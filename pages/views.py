@@ -19,10 +19,11 @@ def index(request):
     r = redis.Redis(host='redis.kdalegends.me', port = 6379, password='aulaivo')
     lista = r.keys('produto:*')
     produtos = []
+    context = {}
     for i in lista:
-        produto.append(r.hmget(i))
+        produtos.append(r.hmget(i))
     try:
-        id_user = request.session['user']
+        request.session['user']
     except:
         request.session['user'] = random.getrandbits(128)
     context['produtos'] = produtos
