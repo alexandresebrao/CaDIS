@@ -12,6 +12,7 @@ def index(request):
     session = cluster.connect('ecommerce')
     rows = session.execute('SELECT codigo, descricao, preco FROM produto')
     context = {'rows': rows}
+    print request.session.session_key
     return render(request, 'base.html', context)
 
 
