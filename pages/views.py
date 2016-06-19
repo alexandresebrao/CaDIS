@@ -68,6 +68,7 @@ def mostrar_carrinho(request):
     context['carrinho'] = carrinho
     return render(request, 'carrinho.html', context)
 
+
 def limpar_carrinho(request):
     r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
     try:
