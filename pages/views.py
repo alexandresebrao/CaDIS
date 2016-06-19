@@ -3,6 +3,7 @@
 from django.shortcuts import render
 import simplejson as json
 from django.http import HttpResponse, JsonResponse
+import random
 
 # DataBase
 from cassandra.cluster import Cluster
@@ -16,7 +17,13 @@ def index(request):
     session = cluster.connect('ecommerce')
     rows = session.execute('SELECT codigo, descricao, preco FROM produto')
     context = {'rows': rows}
-    print request.session.session_key
+    try:
+        id_user = request.session['user']
+    except:
+        request.session['user'] = random.getrandbits(128)
+
+    print request.session['user']
+    
     return render(request, 'base.html', context)
 
 
