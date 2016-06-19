@@ -8,12 +8,12 @@
 <body>
 <table>
   {% for item in produtos %}
-  {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
-  <td>{{ item.nome }}</td><td><td>{{item.preco}}</td>
-  {% if forloop.counter|divisibleby:3 %}</tr>{% endif %}
+  <tr>
+  <td>{{ item.nome }}</td><td><td>{{item.preco}}</td><td><a href="#">Adicionar ao carrinho</a>
+  </tr>
   {% endfor %}
   <div id="stats">
-  <!-- STATS: Total: %(total_time).2fs Python: %(python_time).2fs DB: %(db_time).2fs Queries: %(db_queries)d ENDSTATS -->
+  <br>STATS: Total: %(total_time).2fs Python: %(python_time).2fs DB: %(db_time).2fs Queries: %(db_queries)d ENDSTATS
   </div>
 </table>
 </body>
