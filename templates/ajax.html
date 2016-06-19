@@ -1,9 +1,8 @@
+[
+{%for row in rows%}
 {
-    // Query is not required as of version 1.2.5
-    "query": "Unit",
-    "suggestions": [
-        { "value": "United Arab Emirates", "data": "AE" },
-        { "value": "United Kingdom",       "data": "UK" },
-        { "value": "United States",        "data": "US" }
-    ]
-}
+  "name":"{{row.descricao}}",
+  "price":"R${{row.preco|floatformat:"-2"}}"
+},
+{%endfor%}
+]
