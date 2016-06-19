@@ -3,47 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Example of Twitter Typeahead</title>
-<script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
-<script  type="text/javascript" src="{%static 'js/typeahead.js'%}"></script>
-<script type="text/javascript">
-$(window).load(function(){
-        $('#search').keyup(function(){
-            var searchField = $('#search').val();
-            var regex = new RegExp(searchField, "i");
-            var output = '<div class="row">';
-            var count = 1;
-            $.getJSON('listarprodutos', function(data) {
-              $.each(data, function(key, val){
-                if ((val.name.search(regex) != -1) || (val.location.search(regex) != -1)) {
-                  output += '<div class="col-md-6 well">';
-                  output += '<div class="col-md-7">';
-                  output += '<h5>' + val.name + '</h5>';
-                  output += '<p>' + val.price + '</p>'
-                  output += '</div>';
-                  output += '</div>';
-                  if(count%2 == 0){
-                    output += '</div><div class="row">'
-                  }
-                  count++;
-                }
-              });
-              output += '</div>';
-              console.log(output + "Nada");
-              $('#results').html(output);
-            });
-        });
-      });
 
-</script>
-</style>
 </head>
 <body>
-  <form role="form">
-          <div class="form-group">
-            <input type="email" class="form-control input-lg" id="search" placeholder="Sart type 'a' ....">
-          </div>
-  </form>
-  <div id="results"></div>
-
+{%for produto in produtos%}
+<br>{{produto}}
+{%endfor%}
 </body>
 </html>
