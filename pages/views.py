@@ -16,12 +16,12 @@ def index(request):
     # session = cluster.connect('ecommerce')
     # rows = session.execute('SELECT codigo, descricao, preco FROM produto')
     # context = {'rows': rows}
-    r = redis.Redis(host='redis.kdalegends.me', port = 6379, password='aulaivo')
+    r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
     lista = r.keys('produto:*')
-    produtos = []
+    produtos = {}
     context = {}
     for i in lista:
-        produtos.append(r.hmget(i))
+        produtos[i.replace('produto:', '').replace('_', ' ')] = r.get(i)
     try:
         request.session['user']
     except:
