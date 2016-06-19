@@ -67,3 +67,15 @@ def mostrar_carrinho(request):
         carrinho.append(r.hgetall(i))
     context['carrinho'] = carrinho
     return render(request, 'carrinho.html', context)
+
+def limpar_carrinho(request):
+    r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
+    try:
+        request.session['user']
+    except:
+        request.session['user'] = random.getrandbits(128)
+    string = 'carrinho:%s' % request.session['user']
+    lista = r.keys(string)
+    for i in lista:
+        r.delete(i)
+    return redirect('/')
