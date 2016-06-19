@@ -8,9 +8,9 @@
 <body>
 <table>
   {% for item in produtos %}
-  {% if forloop.counter0|divisibleby:2 %}<tr>{% endif %}
+
   <td>{{ item.name }}</td><td><td>{{item.preco}}</td>
-  {% if forloop.counter|divisibleby:2 or forloop.last %}</tr>{% endif %}
+
   {% endfor %}
 </table>
 </body>
