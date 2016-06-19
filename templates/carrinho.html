@@ -6,10 +6,12 @@
 
 </head>
 <body>
+  <a href="/limpar_carrinho/">Limpar Carrinho</a>
+  <br>
 <table>
   {% for item in carrinho %}
   <tr>
-  <td>{{ item.nome }}</td><td><td>{{item.preco|floatformat:'-2'}}</td><td>
+  <td>{{ item.nome }}</td><td><td>{{item.preco|floatformat:"-2"}}</td><td>
   </tr>
   {% endfor %}
 </table>
