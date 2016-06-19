@@ -21,7 +21,8 @@ def index(request):
     produtos = {}
     context = {}
     for i in lista:
-        produtos[i.replace('produto:', '').replace('_', ' ')] = r.get(i)
+        produtos['name'] = i.replace('produto:', '').replace('_', ' ')]
+        produtos['preco'] = r.get(i)
     try:
         request.session['user']
     except:
