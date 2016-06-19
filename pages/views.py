@@ -40,13 +40,14 @@ def carrinho(request, produto):
         request.session['user'] = random.getrandbits(128)
     # Primeiramente vamos ver os produtos do usuario no carrinho
     r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
-    string = 'carrinho:%s:*' % request.session['user']
-    lista = r.keys(string)
-    string = 'carrinho:%s:%s' % (request.session['user'], len(lista))
-    produto = {}
-    produto['nome'] = produto
-    string_valor = 'produto:%s' % (produto.replace(' ', '_'))
-    produto['preco'] = r.get(string_valor)
+    print produto
+    # string = 'carrinho:%s:*' % request.session['user']
+    # lista = r.keys(string)
+    # string = 'carrinho:%s:%s' % (request.session['user'], len(lista))
+    # produto = {}
+    # produto['nome'] = produto
+    # string_valor = 'produto:%s' % (produto.replace(' ', '_'))
+    # produto['preco'] = r.get(string_valor)
     r.hmset(string, produto)
 
     return redirect('/carrinho/')
