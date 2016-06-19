@@ -8,10 +8,11 @@
 <body>
 <table>
   {% for item in produtos %}
-
-  <td>{{ item.name }}</td><td><td>{{item.preco}}</td>
-
+  {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
+  <td>{{ item.nome }}</td><td><td>{{item.preco}}</td>
+  {% if forloop.counter|divisibleby:3 %}</tr>{% endif %}
   {% endfor %}
+
 </table>
 </body>
 </html>

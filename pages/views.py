@@ -18,16 +18,19 @@ def index(request):
     # context = {'rows': rows}
     r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
     lista = r.keys('produto:*')
-    produtos = {}
+    produtos = []
     context = {}
     for i in lista:
-        produtos['nome'] = i.replace('produto:', '').replace('_', ' ')
-        produtos['preco'] = r.get(i)
+        produto = {}
+        produto['nome'] = i.replace('produto:', '').replace('_', ' ')
+        produto['preco'] = r.get(i)
+        produtos.append(produto)
     try:
         request.session['user']
     except:
         request.session['user'] = random.getrandbits(128)
     context['produtos'] = produtos
+    print produtos
     return render(request, 'base.html', context)
 
 
