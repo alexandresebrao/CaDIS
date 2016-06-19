@@ -46,7 +46,7 @@ def carrinho(request, produto):
     string = 'carrinho:%s:%s' % (request.session['user'], len(lista))
     string_valor = 'produto:%s' % (produto.replace(' ', '_'))
     produto_car = {}
-    produto_car['nome'] = string_valor
+    produto_car['nome'] = string_valor.replace('produto:','').replace('_',' ')
     produto_car['preco'] = r.get(string_valor)
     r.hmset(string, produto_car)
 
