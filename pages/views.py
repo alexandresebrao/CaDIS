@@ -75,7 +75,7 @@ def limpar_carrinho(request):
         request.session['user']
     except:
         request.session['user'] = random.getrandbits(128)
-    string = 'carrinho:%s' % request.session['user']
+    string = 'carrinho:%s:*' % request.session['user']
     lista = r.keys(string)
     for i in lista:
         r.delete(i)
