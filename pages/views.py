@@ -1,6 +1,6 @@
 # coding: utf-8
 # DJANGO
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import simplejson as json
 from django.http import HttpResponse, JsonResponse
 import random
@@ -30,29 +30,39 @@ def index(request):
     except:
         request.session['user'] = random.getrandbits(128)
     context['produtos'] = produtos
-    print produtos
     return render(request, 'base.html', context)
 
 
-def carrinho(request):
+def carrinho(request, produto):
+    try:
+        request.session['user']
+    except:
+        request.session['user'] = random.getrandbits(128)
+    # Primeiramente vamos ver os produtos do usuario no carrinho
+    r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
+    string = 'carrinho:%s:*' % request.session['user']
+    lista = r.keys(string)
+    string = 'carrinho:%s:%s' % (request.session['user'], len(lista))
+    produto = {}
+    produto['nome'] = produto
+    string_valor = 'produto:%s' % (produto.replace(' ', '_'))
+    produto['preco'] = r.get(string_valor)
+    r.hmset(string, produto)
+
+    return redirect('/carrinho/')
+
+
+def mostrar_carrinho(request):
+    try:
+        request.session['user']
+    except:
+        request.session['user'] = random.getrandbits(128)
     context = {}
-    return render(request, 'polls/index.html', context)
-
-
-def fecharpedido(request):
-    context = {}
-    return render(request, 'polls/index.html', context)
-
-
-def ajax(request):
-
-    cluster = Cluster()
-    session = cluster.connect('ecommerce')
-    rows = session.execute('SELECT codigo, descricao, preco FROM produto')
-    lista = []
-    for row in rows:
-        dicto = {}
-        dicto['name'] = row.descricao
-        dicto['price'] = row.preco
-        lista.append(dicto)
-    return JsonResponse(lista, safe=False)
+    r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
+    carrinho = []
+    string = 'carrinho:%s:*' % request.session['user']
+    lista = r.keys(string)
+    for i in lista:
+        carrinho.append(r.hgetall(i))
+    context['carrinho'] = carrinho
+    return render(request, 'carrinho.html', context)

@@ -7,9 +7,9 @@
 </head>
 <body>
 <table>
-  {% for item in produtos %}
+  {% for item in carrinho %}
   <tr>
-  <td>{{ item.nome }}</td><td><td>{{item.preco}}</td><td><a href="/addcarrinho/{{item.nome}}">Adicionar ao carrinho</a>
+  <td>{{ item.nome }}</td><td><td>{{item.preco}}</td><td>
   </tr>
   {% endfor %}
   <div id="stats">
