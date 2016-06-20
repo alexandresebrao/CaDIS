@@ -19,6 +19,7 @@ for produto in produtos:
 	string = "produto:%s" % (produto.descricao.replace(' ', '_'))
 	print string
 	valor = {}
-	valor['codigo'] = produto.codigo
-	valor['preco'] = produto.preco
-	r.hmset(string, valor)
+	valor['codigo'] = int(produto.codigo)
+	valor['preco'] = float(produto.preco)
+	print valor
+	r.hmset(string, '%s' % valor)
