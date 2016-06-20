@@ -70,6 +70,7 @@ def mostrar_carrinho(request):
         carrinho.append(r.hgetall(i))
         somatorio += float(r.hgetall(i)['preco'])
     context['carrinho'] = carrinho
+    context['totalcompra'] = somatorio
     return render(request, 'carrinho.html', context)
 
 
