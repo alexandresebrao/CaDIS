@@ -45,6 +45,7 @@ def carrinho(request, produto):
     string = 'carrinho:%s:*' % request.session['user']
     lista = r.keys(string)
     string = 'carrinho:%s:%s' % (request.session['user'], len(lista))
+    i = r.hget('produto:%s' % produto.replace(' ','_'))
     produto_car = {}
     produto_car['nome'] = produto
     produto_car['preco'] = r.hgetall(i)['preco']
