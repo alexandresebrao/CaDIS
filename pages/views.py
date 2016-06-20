@@ -68,7 +68,7 @@ def mostrar_carrinho(request):
     somatorio = 0
     for i in lista:
         carrinho.append(r.hgetall(i))
-        somatorio += r.hgetall(i)['preco']
+        somatorio += int(r.hgetall(i)['preco'])
     context['carrinho'] = carrinho
     return render(request, 'carrinho.html', context)
 
