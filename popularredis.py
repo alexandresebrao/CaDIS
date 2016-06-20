@@ -18,7 +18,7 @@ for produto in produtos:
 	print "-----"
 	string = "produto:%s" % (produto.descricao.replace(' ', '_'))
 	print string
-	print "-----"
-	# #string = "produto:%s" %produto['descricao']
-	# string = "produto:%s" %produto[1].replace (" ", "_")
-	# r.set(string, produto[0])
+	valor = {}
+	valor['codigo'] = produto.codigo
+	valor['preco'] = produto.preco
+	r.hmset(string, valor)
