@@ -45,11 +45,11 @@ def carrinho(request, produto):
     string = 'carrinho:%s:*' % request.session['user']
     lista = r.keys(string)
     string = 'carrinho:%s:%s' % (request.session['user'], len(lista))
-    i = r.hget('produto:%s' % produto.replace(' ','_'))
+    i = r.hgetall('produto:%s' % produto.replace(' ','_'))
     produto_car = {}
     produto_car['nome'] = produto
-    produto_car['preco'] = r.hgetall(i)['preco']
-    produto_car['codigo'] = r.hgetall(i)['codigo']
+    produto_car['preco'] = i['preco']
+    produto_car['codigo'] = i['codigo']
     r.hmset(string, produto_car)
 
     return redirect('/carrinho/')
