@@ -21,5 +21,4 @@ for produto in produtos:
 	valor = {}
 	valor['codigo'] = int(produto.codigo)
 	valor['preco'] = float(produto.preco)
-	print valor
-	r.hmset(string, '%s' % valor)
+	r.hmset(string, valor)

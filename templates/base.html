@@ -17,7 +17,7 @@
 
   {% for item in produtos %}
   <tr>
-  <td>{{ item.nome }}</td><td><td>R${{item.preco|floatformat:"2"}}</td><td><td><a href="/addcarrinho/{{item.codigo}}/">Adicionar ao carrinho</a>
+  <td>{{ item.nome }}</td><td><td>R${{item.preco|floatformat:"2"}}</td><td><td><a href="/addcarrinho/{{item.nome}}/">Adicionar ao carrinho</a>
   </tr>
   {% endfor %}
 </table>
