@@ -23,7 +23,8 @@ def index(request):
     for i in lista:
         produto = {}
         produto['nome'] = i.replace('produto:', '').replace('_', ' ')
-        produto['preco'] = r.get(i)
+        produto['preco'] = r.hgetall(i)['preco']
+        produto['codigo'] = r.hgetall(i)['codigo']
         produtos.append(produto)
     try:
         request.session['user']
