@@ -7,7 +7,7 @@ import random
 # DataBase
 from cassandra.cluster import Cluster
 from cassandra.query import named_tuple_factory, dict_factory
-
+from datetime import datetime
 import redis
 
 
