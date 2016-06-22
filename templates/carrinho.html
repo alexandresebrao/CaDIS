@@ -48,5 +48,15 @@
 			<div class="ui black button" style="margin-left: 20px"><i class="calculator icon"></i>Total da compra</div>
 				<a class="ui basic black left pointing label">{{ totalcompra }}</a>
 		</div>
+      <div class="ui form">
+        <form method="post" action="/finalizar/">
+        <div class="field">
+          <label>CPF:</label>
+          <input type="text" name="cpf" value="cpf">
+        </div>
+        <button type="submit" class="ui submit button">Enviar</button>
+        </form>
+      </div>
+
 	</body>
 </html>

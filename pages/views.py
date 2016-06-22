@@ -6,6 +6,8 @@ from django.http import HttpResponse, JsonResponse
 import random
 # DataBase
 from cassandra.cluster import Cluster
+from cassandra.query import named_tuple_factory, dict_factory
+
 import redis
 
 
@@ -85,3 +87,33 @@ def limpar_carrinho(request):
     for i in lista:
         r.delete(i)
     return redirect('/')
+
+def finalizar(request):
+    r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
+    try:
+        request.session['user']
+    except:
+        request.session['user'] = random.getrandbits(128)
+    string = 'carrinho:%s:*' % request.session['user']
+    # insert into pedido (codigo_tran, cod_pedido , cpf , data , produto , quantidade) values (232, 1, 83487458421, '2015-02-03 23:42',1166, 2);
+    session.row_factory = dict_factory
+    row = session.execute('SELECT max(codigo_tran) FROM pedido LIMIT 1')
+    codigo_tran = int(row[0]['system.max(codigo_tran)'])
+    row = session.execute('SELECT max(cod_pedido) FROM pedido LIMIT 1')
+    codigo_pedido = int(row[0]['system.max(cod_pedido)']) + 1
+    cpf = request.POST['cpf']
+    lista = r.keys(string)
+    for i in lista:
+        codigo_tran += 1
+        item = r.hgetall(i)
+        string_cql = "insert into pedido (codigo_tran, cod_pedido , cpf , data , produto , quantidade) values (%s, %s, %s, %s,%s, 1);" % (codigo_tran, codigo_pedido, cpf, datetime.now(), item['codigo'])
+    return redirect('/limpar_carrinho/')
+
+
+def admin(request):
+    r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
+    try:
+        request.session['user']
+    except:
+        request.session['user'] = random.getrandbits(128)
+    return None
