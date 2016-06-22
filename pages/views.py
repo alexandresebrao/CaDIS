@@ -89,13 +89,14 @@ def limpar_carrinho(request):
     return redirect('/')
 
 def finalizar(request):
+    cluster = Cluster()
+    session = cluster.connect('ecommerce')
     r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
     try:
         request.session['user']
     except:
         request.session['user'] = random.getrandbits(128)
     string = 'carrinho:%s:*' % request.session['user']
-    # insert into pedido (codigo_tran, cod_pedido , cpf , data , produto , quantidade) values (232, 1, 83487458421, '2015-02-03 23:42',1166, 2);
     session.row_factory = dict_factory
     row = session.execute('SELECT max(codigo_tran) FROM pedido LIMIT 1')
     codigo_tran = int(row[0]['system.max(codigo_tran)'])
