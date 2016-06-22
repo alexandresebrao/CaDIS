@@ -113,9 +113,10 @@ def finalizar(request):
 
 
 def admin(request):
-    r = redis.Redis(host='redis.kdalegends.me', port=6379, password='aulaivo')
-    try:
-        request.session['user']
-    except:
-        request.session['user'] = random.getrandbits(128)
-    return None
+    cluster = Cluster()
+    session = cluster.connect('ecommerce')
+    session.row_factory = dict_factory
+    rows = session.execute("SELECT * FROM pedido ORDER BY cpf ASC")
+    context = {}
+    context['compras'] = rows
+    return render(request, 'admin.html', context)

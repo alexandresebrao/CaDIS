@@ -4,7 +4,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>CaDIS - Pagina Inicial</title>
+		<title>CaDIS - Admin</title>
 
 		<link rel="stylesheet" type="text/css" href="{% static 'Semantic/semantic.css' %}"/>
 		<link rel="stylesheet" type="text/css" href="{% static 'Semantic/semantic.min.css' %}">
@@ -27,19 +27,20 @@
 			<table class="ui single line table">
 			   <thead>
 				   <tr>
-						<th>Produto</th>
-						<th>Preço</th>
-						<th></th>
+						<th>Codigo da Transação</th>
+						<th>Codigo produto</th>
+						<th>Codigo Pedido</th>
+            <th>CPF</th>
 					</tr>
 				</thead>
 				<tbody>
-				  {% for item in produtos %}
+				  {% for item in compras %}
 				  <div class="ui buttons">
 					  <tr>
-						<td>{{ item.nome }}</td>
-						<td>R${{item.preco|floatformat:"2"}}</td>
-						<td><button class="ui button"><a href="/addcarrinho/{{item.nome}}/">Adicionar ao carrinho</a></button>
-
+						<td>{{ item.codigo_tran }}</td>
+						<td>{{item.produto}}</td>
+						<td>{{item.cod_pedido}}</td>
+            <td>{{item.cpf}}</td>
 					</div>
 				 {% endfor %}
 				</tbody>
