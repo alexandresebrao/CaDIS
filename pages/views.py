@@ -107,7 +107,7 @@ def finalizar(request):
     for i in lista:
         codigo_tran += 1
         item = r.hgetall(i)
-        string_cql = "insert into pedido (codigo_tran, cod_pedido , cpf , data , produto , quantidade) values (%s, %s, %s, %s,%s, 1);" % (codigo_tran, codigo_pedido, cpf, datetime.now(), item['codigo'])
+        string_cql = "insert into pedido (codigo_tran, cod_pedido , cpf , data , produto , quantidade) values (%s, %s, %s, %s,2016-05-01 10:15, 1);" % (codigo_tran, codigo_pedido, cpf, item['codigo'])
         session.execute(string_cql)
     return redirect('/limpar_carrinho/')
 
