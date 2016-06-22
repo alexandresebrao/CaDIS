@@ -1,20 +1,52 @@
-{% load staticfiles %}<!DOCTYPE html>
+{% load staticfiles %}<!--{% load staticfiles %}<!DOCTYPE html>-->
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Example of Twitter Typeahead</title>
+	<head>
+		<meta charset="UTF-8">
+		<title>Carrinho de compras</title>
 
-</head>
-<body>
-  <a href="/">Continuar comprando</a> - <a href="/limpar_carrinho/">Limpar Carrinho</a>
-  <br>
-<table>
-  {% for item in carrinho %}
-  <tr>
-  <td>Codigo: {{ item.codigo }}</td><td>{{ item.nome }}</td><td><td>{{item.preco|floatformat:"2"}}</td><td>
-  </tr>
-  {% endfor %}
-</table>
-<br>Total da compra {{ totalcompra }}
-</body>
+		<link rel="stylesheet" type="text/css" href="Semantic/semantic.css"/>
+		<link rel="stylesheet" type="text/css" href="Semantic/semantic.min.css">
+		<link rel="stylesheet" type="text/js" href="Semantic/semantic.js">
+		<link rel="stylesheet" type="text/js" href="Semantic/semantic.min.js">
+
+	</head>
+	<style type="text/css">
+		a:link{
+			text-decoration: none;
+			color: black;
+		}
+
+	</style>
+	<body>
+		<div class="ui secondary  menu">
+			<a href="/" class="item" style="margin-left: 20px"><i class="large add to cart icon"></i>Continuar comprando</a>
+			<a href="/limpar_carrinho/" class="item"><i class="large remove circle icon"></i>Limpar Carrinho</a>
+		</div>
+		<div class="ui segment">
+			<table class="ui celled table">
+				<thead>
+				   <tr>
+						<th>Código</th>
+						<th>Produto</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!--{% for item in carrinho %}-->
+					<div class="ui buttons">
+						<tr>
+							<td>{{ item.codigo }}</td>
+							<td>{{ item.nome }</td>
+							<td>{{item.preco|floatformat:"2"}}</td>
+						</tr>
+					</div>
+					<!--{% endfor %}-->
+				</tbody>
+			</table>
+		</div>
+		<div class="ui labeled button" tabindex="0">
+			<div class="ui black button" style="margin-left: 20px"><i class="calculator icon"></i>Total da compra</div>
+				<a class="ui basic black left pointing label">{{ totalcompra }}</a>
+		</div>
+	</body>
 </html>

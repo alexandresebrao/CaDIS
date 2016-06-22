@@ -1,25 +1,49 @@
-{% load staticfiles %}<!DOCTYPE html>
+{% load staticfiles %}<!--{% load staticfiles %}<!DOCTYPE html>-->
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Example of Twitter Typeahead</title>
 
-</head>
-<body>
-  <a href="/carrinho/">Mostrar carrinho</a>
-  <br>
-<table>
-  <tr>
-    <td>Produto</td>
-    <td>Preço</td>
-    <td></td>
-  </tr>
+	<head>
+		<meta charset="UTF-8">
+		<title>Example of Twitter Typeahead</title>
 
-  {% for item in produtos %}
-  <tr>
-  <td>{{ item.nome }}</td><td><td>R${{item.preco|floatformat:"2"}}</td><td><td><a href="/addcarrinho/{{item.nome}}/">Adicionar ao carrinho</a>
-  </tr>
-  {% endfor %}
-</table>
-</body>
+		<link rel="stylesheet" type="text/css" href="{% static 'Semantic/semantic.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'Semantic/semantic.min.css' %}">
+		<link rel="stylesheet" type="text/js" href="{% static 'Semantic/semantic.js' %}">
+		<link rel="stylesheet" type="text/js" href="{% 'Semantic/semantic.min.js' %}">
+
+	</head>
+	<style type="text/css">
+			a:link{
+				text-decoration: none;
+				color: black;
+			}
+
+	</style>
+	<body>
+		<div class="ui secondary  menu">
+			<a href="/carrinho/" class="item" style="margin-left: 20px"><i class="large shop icon"></i> Mostrar carrinho</a>
+		</div>
+		<div class="ui segment">
+			<table class="ui single line table">
+			   <thead>
+				   <tr>
+						<th>Produto</th>
+						<th>Preço</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				  {% for item in produtos %}
+				  <div class="ui buttons">
+					  <tr>
+						<td>{{ item.nome }}</td>
+						<td>R${{item.preco|floatformat:"2"}}</td>
+						<td><button class="ui button"><a href="/addcarrinho/{{item.nome}}/">Adicionar ao carrinho</a></button>
+
+					</div>
+				 {% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</body>
 </html>
