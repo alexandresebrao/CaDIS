@@ -50,6 +50,7 @@
 		</div>
       <div class="ui form">
         <form method="post" action="/finalizar/">
+        {% csrf_token %}
         <div class="field">
           <label>CPF:</label>
           <input type="text" name="cpf" value="cpf">
