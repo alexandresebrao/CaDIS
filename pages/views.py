@@ -116,7 +116,7 @@ def admin(request):
     cluster = Cluster()
     session = cluster.connect('ecommerce')
     session.row_factory = dict_factory
-    rows = session.execute("SELECT * FROM pedido ORDER BY cpf ASC")
+    rows = session.execute("SELECT * FROM pedido")
     context = {}
     context['compras'] = rows
     return render(request, 'admin.html', context)
