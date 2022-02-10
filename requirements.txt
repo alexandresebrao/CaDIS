@@ -1,7 +1,7 @@
 cassandra-driver==3.4.1
 cffi==1.6.0
 cryptography==3.3.2
-Django==2.2.24
+Django==2.2.27
 django-bootstrap3==7.0.1
 enum34==1.1.6
 flake8==2.5.4
